@@ -67,10 +67,10 @@ class Fib:
         return FibIter(self.n)
 
     def __repr__(self):
-        if self.n is None:
-            return 'Fib()'
-        else:
+        if self.n is not None:
             return 'Fib(' + str(self.n) + ')'
+        else:
+            return 'Fib()'
 
 
 class FibIter:
@@ -87,7 +87,7 @@ class FibIter:
         while self.n is None or self.n > self.i:
             self.i += 1
             f0 = self.f1 + self.f2
-            self.f1 = self.f2
+            self.f1 = self.f2 
             self.f2 = f0
             return self.f1
         raise StopIteration
@@ -97,12 +97,10 @@ def fib_yield(n=None):
     '''
     If n is None, then the generator is infinite.
     '''
-    f1 = 1
-    f2 = 1
+    f1, f2 = 1, 1
     i = 1
 
     while n is None or i <= n:
         yield f1
-        f1 = f2
-        f2 = f1 + f2
+        f1, f2 = f2, f1 + f2
         i += 1
