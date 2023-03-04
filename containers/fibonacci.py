@@ -1,8 +1,8 @@
 
-################################################################################
+#####
 # example fibonacci number code;
 # you do not have to modify this code in any way
-################################################################################
+####
 
 
 def fibs(n):
@@ -46,10 +46,10 @@ def fib(n):
     return f2
 
 
-################################################################################
+###
 # fibonacci number code using generators;
 # you will need to implement the functions below
-################################################################################
+##
 
 
 class Fib:
@@ -60,16 +60,49 @@ class Fib:
     >>> list(Fib(5))
     [1, 1, 2, 3, 5]
     '''
+    def __init__(self, n=None):
+        self.n = n
+
+    def __iter__(self):
+        return FibIter(self.n)
+
+    def __repr__(self):
+        if self.n is None:
+            return 'Fib()'
+        else:
+            return 'Fib(' + str(self.n) + ')'
 
 
 class FibIter:
     '''
     This is the iterator helper class for the Fib class.
     '''
+    def __init__(self, n):
+        self.n = n
+        self.i = 0
+        self.f1 = 0
+        self.f2 = 1
+
+    def __next__(self):
+        while self.n is None or self.n > self.i:
+            self.i += 1
+            f0 = self.f1 + self.f2
+            self.f1 = self.f2
+            self.f2 = f0
+            return self.f1
+        raise StopIteration
 
 
 def fib_yield(n=None):
     '''
-    This function returns a generator that computes the first n fibonacci numbers.
     If n is None, then the generator is infinite.
     '''
+    f1 = 1
+    f2 = 1
+    i = 1
+
+    while n is None or i <= n:
+        yield f1
+        f1 = f2
+        f2 = f1 + f2
+        i += 1
