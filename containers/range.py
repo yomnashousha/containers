@@ -10,24 +10,20 @@ def range(a, b=None, c=None):
     >>> list(range(1, 5, 2))
     [1, 3]
     '''
-    if b is None:
-        beg = 0
-        end = a
-    else:
+    if b is not None:
         beg = a
         end = b
-
-    if c is None:
-        right = 1
     else:
+        beg = 0
+        end = a
+
+    if c is not None:
         right = c
-
-    if right < 0:
-        while beg > end:
-            f0 = beg
-            beg += right
     else:
-        while beg < end:
-            f0 = beg
-            beg += right
-            yield f0
+        right = 1
+
+    while True:
+        if (right > 0 and beg >= end) or (right < 0 and beg <= end):
+            break
+        yield beg 
+        beg += right
