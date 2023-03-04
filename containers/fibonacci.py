@@ -87,7 +87,7 @@ class FibIter:
         while self.n is None or self.n > self.i:
             self.i += 1
             f0 = self.f1 + self.f2
-            self.f1 = self.f2 
+            self.f1 = self.f2
             self.f2 = f0
             return self.f1
         raise StopIteration

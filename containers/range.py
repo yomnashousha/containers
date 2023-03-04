@@ -25,5 +25,5 @@ def range(a, b=None, c=None):
     while True:
         if (right > 0 and beg >= end) or (right < 0 and beg <= end):
             break
-        yield beg 
+        yield beg
         beg += right
